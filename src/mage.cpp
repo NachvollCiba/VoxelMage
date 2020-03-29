@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
@@ -24,6 +25,11 @@ GLFWwindow* createWindow() {
 		return NULL;
 	}
 	glfwMakeContextCurrent(window);
+
+	glewExperimental=true;
+	if (glewInit() != GLEW_OK) {
+		throw "Failed to initialize GLEW";
+	}
 
 	return window;
 }
