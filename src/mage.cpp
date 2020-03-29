@@ -31,7 +31,7 @@ GLFWwindow* createWindow() {
 int main(int argc, char *argv[]) {
 	GLFWwindow* window = createWindow();
 
-	
+
 
 	return 0;
 }
