@@ -37,7 +37,15 @@ GLFWwindow* createWindow() {
 int main(int argc, char *argv[]) {
 	GLFWwindow* window = createWindow();
 
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
+	do {
+		glClear(GL_COLOR_BUFFER_BIT);
+		
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	} while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && 
+	         glfwWindowShouldClose(window) == 0);
 
 	return 0;
 }
