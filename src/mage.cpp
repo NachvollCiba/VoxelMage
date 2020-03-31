@@ -6,6 +6,8 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
+#include "InputHandler.h"
+
 
 GLFWwindow* createWindow() {
 	// initialize GLFW
@@ -18,7 +20,7 @@ GLFWwindow* createWindow() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(1920, 1080, "VoxelMage", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1024, 768, "VoxelMage", NULL, NULL);
 	if (window == NULL) {
 		fprintf(stderr, "FATAL ERROR: could not create GLFW Window");
 		glfwTerminate();
@@ -37,6 +39,8 @@ GLFWwindow* createWindow() {
 int main(int argc, char *argv[]) {
 	GLFWwindow* window = createWindow();
 
+	InputHandler input = InputHandler(*window);
+
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 	do {
@@ -44,8 +48,7 @@ int main(int argc, char *argv[]) {
 		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-	} while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && 
-	         glfwWindowShouldClose(window) == 0);
+	} while (!input.isKeyPressed(GLFW_KEY_ESCAPE) && glfwWindowShouldClose(window) == 0);
 
 	return 0;
 }
