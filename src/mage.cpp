@@ -1,12 +1,15 @@
 #include <exception>
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
 #include "InputHandler.h"
+#include "ShaderManager.h"
+#include "Renderer.h"
 
 
 GLFWwindow* createWindow() {
@@ -40,11 +43,39 @@ int main(int argc, char *argv[]) {
 	GLFWwindow* window = createWindow();
 
 	InputHandler input = InputHandler(*window);
+	ShaderManager shaderManager = ShaderManager("assets/shaders/");
 
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	GLuint vertexArrayID;
+	glGenVertexArrays(1, &vertexArrayID);
+	glBindVertexArray(vertexArrayID);
+
+	GLuint programID =
+	 shaderManager.loadShaders("TestVertexShader.vs", "TestFragmentShader.fs");
+
+	static const GLfloat triangle[] = {
+		-1.0f, -1.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f,
+		 0.0f,  1.0f, 0.0f
+	};
+
+	GLuint vertexBuffer;
+	glGenBuffers(1, &vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
+
 
 	do {
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		glUseProgram(programID);
+
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		glDisableVertexAttribArray(0);
 		
 		glfwSwapBuffers(window);
 		glfwPollEvents();

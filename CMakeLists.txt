@@ -8,6 +8,8 @@ set(ALL_SOURCES
 	src/mage.cpp
 	src/InputHandler.cpp
 	src/InputHandler.h
+	src/ShaderManager.cpp
+	src/ShaderManager.h
 	src/Renderer.cpp
 	src/Renderer.h
 )
@@ -28,6 +30,6 @@ find_package(OpenGL REQUIRED COMPONENTS OpenGL)
 find_package(glm REQUIRED)
 
 add_dependencies(mage OpenGL::OpenGL)
-
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
 target_link_libraries(mage glew OpenGL::OpenGL glfw glm)
