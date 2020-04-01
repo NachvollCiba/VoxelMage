@@ -39,6 +39,19 @@ GLFWwindow* createWindow() {
 	return window;
 }
 
+
+class CloseGameKeyHandler : public IKeyHandler {
+	private: 
+		bool* _running;
+
+	public:
+		CloseGameKeyHandler(bool* running) : _running(running) {}
+
+		void onJustPressed() override {
+			*this->_running = false;
+		}
+};
+
 int main(int argc, char *argv[]) {
 	GLFWwindow* window = createWindow();
 
@@ -73,8 +86,13 @@ int main(int argc, char *argv[]) {
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
 
+	bool running = true;
+	CloseGameKeyHandler closeHandler = CloseGameKeyHandler(&running);
+	input.registerKeyHandler(GLFW_KEY_ESCAPE, &closeHandler);
 
-	do {
+	while (running) {
+		input.update();
+
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(programID);
@@ -89,7 +107,7 @@ int main(int argc, char *argv[]) {
 		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-	} while (!input.isKeyPressed(GLFW_KEY_ESCAPE) && glfwWindowShouldClose(window) == 0);
+	}
 
 	glDeleteBuffers(1, &vertexBuffer);
 	glDeleteProgram(programID);
