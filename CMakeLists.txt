@@ -10,6 +10,8 @@ set(ALL_SOURCES
 	src/InputHandler.h
 	src/ShaderManager.cpp
 	src/ShaderManager.h
+	src/Camera.cpp
+	src/Camera.h
 	src/Renderer.cpp
 	src/Renderer.h
 )

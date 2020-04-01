@@ -9,7 +9,7 @@
 
 #include "InputHandler.h"
 #include "ShaderManager.h"
-#include "Renderer.h"
+#include "Camera.h"
 
 
 GLFWwindow* createWindow() {
@@ -45,6 +45,8 @@ int main(int argc, char *argv[]) {
 	InputHandler input = InputHandler(*window);
 	ShaderManager shaderManager = ShaderManager("assets/shaders/");
 
+	Camera camera = Camera(45.0f);
+
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	GLuint vertexArrayID;
 	glGenVertexArrays(1, &vertexArrayID);
@@ -52,6 +54,13 @@ int main(int argc, char *argv[]) {
 
 	GLuint programID =
 	 shaderManager.loadShaders("TestVertexShader.vs", "TestFragmentShader.fs");
+	GLuint matrixID = glGetUniformLocation(programID, "MVP");
+
+	camera.setPosition(4, 3, 3);
+	camera.setDirection(0, 0, 0);
+
+	glm::mat4 model = glm::mat4(1.0f);
+	glm::mat4 mvp = camera.transform(model);
 
 	static const GLfloat triangle[] = {
 		-1.0f, -1.0f, 0.0f,
@@ -69,6 +78,7 @@ int main(int argc, char *argv[]) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(programID);
+		glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -81,6 +91,11 @@ int main(int argc, char *argv[]) {
 		glfwPollEvents();
 	} while (!input.isKeyPressed(GLFW_KEY_ESCAPE) && glfwWindowShouldClose(window) == 0);
 
+	glDeleteBuffers(1, &vertexBuffer);
+	glDeleteProgram(programID);
+	glDeleteVertexArrays(1, &vertexArrayID);
+	
+	glfwTerminate();
 	return 0;
 }
 
