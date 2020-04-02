@@ -18,8 +18,8 @@ class InputHandler {
 
 	private:
 		GLFWwindow& _window;
-		IKeyHandler* _handlers[1024];
-		bool _prevState[1024];
+		IKeyHandler* _handlers[GLFW_KEY_LAST];
+		bool _prevState[GLFW_KEY_LAST];
 		std::vector<int> _registered;
 
 		bool _isKeyPressed(int key);

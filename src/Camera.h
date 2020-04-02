@@ -34,8 +34,8 @@ class Camera {
 		void updateDirection(float dX, float dY, float dZ);
 		void updateDirection(const glm::vec3& delta);
 
-		const glm::mat4& getProjectionMatrix();
-		const glm::mat4& getViewMatrix();
+		const glm::mat4& getProjectionMatrix() const;
+		const glm::mat4& getViewMatrix() const;
 
-		glm::mat4 transform(const glm::mat4& modelMatrix);
+		glm::mat4 transform (const glm::mat4& modelMatrix) const;
 };

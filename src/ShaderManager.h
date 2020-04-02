@@ -11,5 +11,5 @@ class ShaderManager {
 	public:
 		ShaderManager(const std::string shaderPath);
 		
-		GLuint loadShaders(std::string vertexShader, std::string fragmentShader);
+		GLuint loadShaders(std::string vertexShader, std::string fragmentShader) const;
 };

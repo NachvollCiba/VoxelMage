@@ -34,6 +34,8 @@ include_directories(libs/glew/include)
 find_package(OpenGL REQUIRED COMPONENTS OpenGL)
 find_package(glm REQUIRED)
 
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+
 add_dependencies(mage OpenGL::OpenGL)
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 

@@ -87,14 +87,89 @@ CMakeFiles/mage.dir/src/mage.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mage.dir/src/mage.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dennis/projects/VoxelMage/src/mage.cpp -o CMakeFiles/mage.dir/src/mage.cpp.s
 
+CMakeFiles/mage.dir/src/InputHandler.cpp.o: CMakeFiles/mage.dir/flags.make
+CMakeFiles/mage.dir/src/InputHandler.cpp.o: src/InputHandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dennis/projects/VoxelMage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/mage.dir/src/InputHandler.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mage.dir/src/InputHandler.cpp.o -c /home/dennis/projects/VoxelMage/src/InputHandler.cpp
+
+CMakeFiles/mage.dir/src/InputHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mage.dir/src/InputHandler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dennis/projects/VoxelMage/src/InputHandler.cpp > CMakeFiles/mage.dir/src/InputHandler.cpp.i
+
+CMakeFiles/mage.dir/src/InputHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mage.dir/src/InputHandler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dennis/projects/VoxelMage/src/InputHandler.cpp -o CMakeFiles/mage.dir/src/InputHandler.cpp.s
+
+CMakeFiles/mage.dir/src/ShaderManager.cpp.o: CMakeFiles/mage.dir/flags.make
+CMakeFiles/mage.dir/src/ShaderManager.cpp.o: src/ShaderManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dennis/projects/VoxelMage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/mage.dir/src/ShaderManager.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mage.dir/src/ShaderManager.cpp.o -c /home/dennis/projects/VoxelMage/src/ShaderManager.cpp
+
+CMakeFiles/mage.dir/src/ShaderManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mage.dir/src/ShaderManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dennis/projects/VoxelMage/src/ShaderManager.cpp > CMakeFiles/mage.dir/src/ShaderManager.cpp.i
+
+CMakeFiles/mage.dir/src/ShaderManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mage.dir/src/ShaderManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dennis/projects/VoxelMage/src/ShaderManager.cpp -o CMakeFiles/mage.dir/src/ShaderManager.cpp.s
+
+CMakeFiles/mage.dir/src/Camera.cpp.o: CMakeFiles/mage.dir/flags.make
+CMakeFiles/mage.dir/src/Camera.cpp.o: src/Camera.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dennis/projects/VoxelMage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/mage.dir/src/Camera.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mage.dir/src/Camera.cpp.o -c /home/dennis/projects/VoxelMage/src/Camera.cpp
+
+CMakeFiles/mage.dir/src/Camera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mage.dir/src/Camera.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dennis/projects/VoxelMage/src/Camera.cpp > CMakeFiles/mage.dir/src/Camera.cpp.i
+
+CMakeFiles/mage.dir/src/Camera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mage.dir/src/Camera.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dennis/projects/VoxelMage/src/Camera.cpp -o CMakeFiles/mage.dir/src/Camera.cpp.s
+
+CMakeFiles/mage.dir/src/Renderer.cpp.o: CMakeFiles/mage.dir/flags.make
+CMakeFiles/mage.dir/src/Renderer.cpp.o: src/Renderer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dennis/projects/VoxelMage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/mage.dir/src/Renderer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mage.dir/src/Renderer.cpp.o -c /home/dennis/projects/VoxelMage/src/Renderer.cpp
+
+CMakeFiles/mage.dir/src/Renderer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mage.dir/src/Renderer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dennis/projects/VoxelMage/src/Renderer.cpp > CMakeFiles/mage.dir/src/Renderer.cpp.i
+
+CMakeFiles/mage.dir/src/Renderer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mage.dir/src/Renderer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dennis/projects/VoxelMage/src/Renderer.cpp -o CMakeFiles/mage.dir/src/Renderer.cpp.s
+
+CMakeFiles/mage.dir/src/CameraControls.cpp.o: CMakeFiles/mage.dir/flags.make
+CMakeFiles/mage.dir/src/CameraControls.cpp.o: src/CameraControls.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dennis/projects/VoxelMage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/mage.dir/src/CameraControls.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mage.dir/src/CameraControls.cpp.o -c /home/dennis/projects/VoxelMage/src/CameraControls.cpp
+
+CMakeFiles/mage.dir/src/CameraControls.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mage.dir/src/CameraControls.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dennis/projects/VoxelMage/src/CameraControls.cpp > CMakeFiles/mage.dir/src/CameraControls.cpp.i
+
+CMakeFiles/mage.dir/src/CameraControls.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mage.dir/src/CameraControls.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dennis/projects/VoxelMage/src/CameraControls.cpp -o CMakeFiles/mage.dir/src/CameraControls.cpp.s
+
 # Object files for target mage
 mage_OBJECTS = \
-"CMakeFiles/mage.dir/src/mage.cpp.o"
+"CMakeFiles/mage.dir/src/mage.cpp.o" \
+"CMakeFiles/mage.dir/src/InputHandler.cpp.o" \
+"CMakeFiles/mage.dir/src/ShaderManager.cpp.o" \
+"CMakeFiles/mage.dir/src/Camera.cpp.o" \
+"CMakeFiles/mage.dir/src/Renderer.cpp.o" \
+"CMakeFiles/mage.dir/src/CameraControls.cpp.o"
 
 # External object files for target mage
 mage_EXTERNAL_OBJECTS =
 
 mage: CMakeFiles/mage.dir/src/mage.cpp.o
+mage: CMakeFiles/mage.dir/src/InputHandler.cpp.o
+mage: CMakeFiles/mage.dir/src/ShaderManager.cpp.o
+mage: CMakeFiles/mage.dir/src/Camera.cpp.o
+mage: CMakeFiles/mage.dir/src/Renderer.cpp.o
+mage: CMakeFiles/mage.dir/src/CameraControls.cpp.o
 mage: CMakeFiles/mage.dir/build.make
 mage: lib/libGLEW.so.2.1.0
 mage: /usr/lib/libOpenGL.so
@@ -105,7 +180,7 @@ mage: /usr/lib/librt.so
 mage: /usr/lib/libm.so
 mage: /usr/lib/libX11.so
 mage: CMakeFiles/mage.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dennis/projects/VoxelMage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable mage"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dennis/projects/VoxelMage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable mage"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mage.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

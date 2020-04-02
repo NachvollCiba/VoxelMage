@@ -12,7 +12,7 @@ ShaderManager::ShaderManager(const std::string shaderPath) {
 }
 
 
-GLuint ShaderManager::loadShaders(std::string vertexShader, std::string fragmentShader) {
+GLuint ShaderManager::loadShaders(std::string vertexShader, std::string fragmentShader) const {
 	std::string vertexShaderPath = this->_shaderPath + vertexShader;
 	std::string fragmentShaderPath = this->_shaderPath + fragmentShader;
 

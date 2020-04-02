@@ -57,14 +57,14 @@ void Camera::updateDirection(const glm::vec3& delta) {
 }
 
 
-const glm::mat4& Camera::getProjectionMatrix() { 
+const glm::mat4& Camera::getProjectionMatrix() const { 
 	return this->_projectionMatrix;
 }
-const glm::mat4& Camera::getViewMatrix() {
+const glm::mat4& Camera::getViewMatrix() const {
 	return this->_viewMatrix;
 }
 
 
-glm::mat4 Camera::transform(const glm::mat4& modelMatrix) {
+glm::mat4 Camera::transform(const glm::mat4& modelMatrix) const {
 	return this->_projectionMatrix * this->_viewMatrix * modelMatrix;
 }

@@ -1,18 +1,89 @@
 #include "Renderer.h"
 
-Renderer::Renderer() {
-	glGenVertexArrays(1, &this->vertexArrayID);
-	glBindVertexArray(this->vertexArrayID);
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+
+Renderer::Renderer(const Camera& camera, const ShaderManager& shaderManager) :
+	_camera(camera),
+	_shaderManager(shaderManager)
+{
+	this->_shaderProgramID
+	 = shaderManager.loadShaders("TestVertexShader.vs", "TestFragmentShader.fs");
 }
 
-void Renderer::drawTriangle(GLfloat coordinates[]) {
-	GLuint vertexBuffer;
-	glGenBuffers(1, &vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(coordinates), coordinates, GL_STATIC_DRAW);
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-	glDisableVertexAttribArray(0);
+Renderer::~Renderer() {
+	glDeleteBuffers(1, &this->_vertexBuffer);
+	glDeleteProgram(this->_shaderProgramID);
+}
+
+
+void Renderer::renderCube(const glm::vec3& pos, float scale, const glm::vec3&) {
+
+	// compute model and mvp matrices
+	glm::mat4 model = glm::translate(glm::mat4(), pos);
+	if (scale != 1.0f) {
+		model = glm::scale(glm::vec3(scale)) * model;
+	}
+	this->_cubes.push_back(model);
+
+	static const GLfloat bufferData[] = {
+		-1.0f,-1.0f,-1.0f, // triangle 1 : begin
+		-1.0f,-1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f, // triangle 1 : end
+		1.0f, 1.0f,-1.0f, // triangle 2 : begin
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f,-1.0f, // triangle 2 : end
+		1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f,-1.0f,
+		1.0f,-1.0f,-1.0f,
+		1.0f, 1.0f,-1.0f,
+		1.0f,-1.0f,-1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f,-1.0f,
+		1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		-1.0f,-1.0f, 1.0f,
+		1.0f,-1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f,-1.0f,-1.0f,
+		1.0f, 1.0f,-1.0f,
+		1.0f,-1.0f,-1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f,-1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f,-1.0f,
+		-1.0f, 1.0f,-1.0f,
+		1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		1.0f,-1.0f, 1.0f
+	};
+
+	glGenBuffers(1, &this->_vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, this->_vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(bufferData), bufferData, GL_STATIC_DRAW);
+
+}
+
+void Renderer::update() {
+	for (glm::mat4& model : this->_cubes) {
+		glm::mat4 mvp = this->_camera.transform(model);
+
+		glUseProgram(this->_shaderProgramID);
+		GLuint matrixID = glGetUniformLocation(this->_shaderProgramID, "MVP");
+		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+		glDrawArrays(GL_TRIANGLES, 0, 12*3);
+		glDisableVertexAttribArray(0);
+		glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
+	}
 }
