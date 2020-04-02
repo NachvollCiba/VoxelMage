@@ -1,3 +1,5 @@
+#pragma once
+
 #include <glm/glm.hpp>
 
 #define ASPECT_16_9 16.0f/9.0f

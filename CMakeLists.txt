@@ -14,6 +14,9 @@ set(ALL_SOURCES
 	src/Camera.h
 	src/Renderer.cpp
 	src/Renderer.h
+	src/utils.h
+	src/CameraControls.cpp
+	src/CameraControls.h
 )
 
 add_executable(mage ${ALL_SOURCES})

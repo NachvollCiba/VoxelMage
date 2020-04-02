@@ -7,9 +7,11 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
+#include "utils.h"
 #include "InputHandler.h"
 #include "ShaderManager.h"
 #include "Camera.h"
+#include "CameraControls.h"
 
 
 GLFWwindow* createWindow() {
@@ -86,12 +88,25 @@ int main(int argc, char *argv[]) {
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
 
+	// Register Key Handlers
 	bool running = true;
 	CloseGameKeyHandler closeHandler = CloseGameKeyHandler(&running);
 	input.registerKeyHandler(GLFW_KEY_ESCAPE, &closeHandler);
 
+	MoveCameraHandler moveLeftHandler = MoveCameraHandler(camera, utils::LEFT);
+	input.registerKeyHandler(GLFW_KEY_A, &moveLeftHandler);
+	MoveCameraHandler moveRightHandler = MoveCameraHandler(camera, utils::RIGHT);
+	input.registerKeyHandler(GLFW_KEY_D, &moveRightHandler);
+	MoveCameraHandler moveForwardHandler = MoveCameraHandler(camera, utils::FORWARD);
+	input.registerKeyHandler(GLFW_KEY_W, &moveForwardHandler);
+	MoveCameraHandler moveBackHandler = MoveCameraHandler(camera, utils::BACKWARD);
+	input.registerKeyHandler(GLFW_KEY_S, &moveBackHandler);
+
+	// Main Game Loop
 	while (running) {
 		input.update();
+
+		mvp = camera.transform(model);
 
 		glClear(GL_COLOR_BUFFER_BIT);
 

@@ -5,7 +5,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 
-
 Camera::Camera(float fieldOfView, float range, float aspectRatio) : 
 	_position(glm::vec3(0.0f, 0.0f, 0.0f)),
 	_direction(glm::vec3(0.0f, 0.0f, 0.0f)),
