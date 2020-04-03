@@ -3,6 +3,8 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <iostream>
+
 
 Renderer::Renderer(const Camera& camera, const ShaderManager& shaderManager) :
 	_camera(camera),
@@ -22,9 +24,9 @@ Renderer::~Renderer() {
 void Renderer::renderCube(const glm::vec3& pos, float scale, const glm::vec3&) {
 
 	// compute model and mvp matrices
-	glm::mat4 model = glm::translate(glm::mat4(), pos);
+	glm::mat4 model = glm::translate(glm::mat4(1.0), pos);
 	if (scale != 1.0f) {
-		model = glm::scale(glm::vec3(scale)) * model;
+		model = model * glm::scale(glm::vec3(scale));
 	}
 	this->_cubes.push_back(model);
 
@@ -74,16 +76,18 @@ void Renderer::renderCube(const glm::vec3& pos, float scale, const glm::vec3&) {
 }
 
 void Renderer::update() {
+	std::cout << "Starting render update" << std::endl;
 	for (glm::mat4& model : this->_cubes) {
 		glm::mat4 mvp = this->_camera.transform(model);
 
 		glUseProgram(this->_shaderProgramID);
 		GLuint matrixID = glGetUniformLocation(this->_shaderProgramID, "MVP");
-		glEnableVertexAttribArray(0);
+		glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, this->_vertexBuffer);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 		glDrawArrays(GL_TRIANGLES, 0, 12*3);
 		glDisableVertexAttribArray(0);
-		glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 	}
 }

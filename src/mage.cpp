@@ -87,6 +87,8 @@ int main(int argc, char *argv[]) {
 	camera.setDirection(0, 0, 0);
 
 	renderer.renderCube(glm::vec3(0.0f, 0.0f, 0.0f));
+	renderer.renderCube(glm::vec3(5.0f, 0.0f, 0.0f));
+	renderer.renderCube(glm::vec3(0.0f, 3.0f, 0.0f));
 
 	// Close Game Key Handler
 	bool running = true;
@@ -105,7 +107,6 @@ int main(int argc, char *argv[]) {
 	}
 
 	std::cout << "Terminating program..." << std::endl;
-	// delete renderer;
 	glDeleteVertexArrays(1, &vertexArrayID);
 	glfwTerminate();
 	return 0;
