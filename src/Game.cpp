@@ -22,11 +22,14 @@ Game::Game(GLFWwindow* window) :
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glGenVertexArrays(1, &this->_vertexArrayID);
 	glBindVertexArray(this->_vertexArrayID);
+	glEnable(GL_CULL_FACE);
 
 	this->_camera = new Camera(45.0f);
 	this->_shaderManager = new ShaderManager("assets/shaders/");
 	this->_renderer = new Renderer(*this->_camera, *this->_shaderManager);
 	this->_inputHandler = new InputHandler(this->_window);
+
+	this->_clock = new Clock();
 
 	std::cout << "Game object initialized" << std::endl;
 }
@@ -44,12 +47,17 @@ void Game::start() {
 	this->_inputHandler->registerKeyHandler(GLFW_KEY_Q, new CloseGameKeyHandler(&this->_isRunning));
 
 	// Register Key Handlers for moving
-	this->_inputHandler->registerKeyHandler(GLFW_KEY_A, new MoveCameraHandler(*this->_camera, utils::LEFT));
-	this->_inputHandler->registerKeyHandler(GLFW_KEY_D, new MoveCameraHandler(*this->_camera, utils::RIGHT));
-	this->_inputHandler->registerKeyHandler(GLFW_KEY_W, new MoveCameraHandler(*this->_camera, utils::FORWARD));
-	this->_inputHandler->registerKeyHandler(GLFW_KEY_S, new MoveCameraHandler(*this->_camera, utils::BACKWARD));
+	this->_inputHandler->registerKeyHandler(
+	 GLFW_KEY_A, new MoveCameraHandler(*this->_camera, *this->_clock, utils::LEFT));
+	this->_inputHandler->registerKeyHandler(
+	 GLFW_KEY_D, new MoveCameraHandler(*this->_camera, *this->_clock, utils::RIGHT));
+	this->_inputHandler->registerKeyHandler(
+	 GLFW_KEY_W, new MoveCameraHandler(*this->_camera, *this->_clock, utils::FORWARD));
+	this->_inputHandler->registerKeyHandler(
+	 GLFW_KEY_S, new MoveCameraHandler(*this->_camera, *this->_clock, utils::BACKWARD));
 
-	this->_inputHandler->registerMouseMovementHandler(new RotateCameraHandler(*this->_camera));
+	this->_inputHandler->registerMouseMovementHandler(
+	 new RotateCameraHandler(*this->_camera, *this->_clock));
 
 
 	// Main Game Loop
@@ -58,6 +66,7 @@ void Game::start() {
 	while (this->_isRunning) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		this->_clock->_update();
 		this->_inputHandler->update();
 		this->_renderer->update();
 
@@ -72,6 +81,7 @@ Game::~Game() {
 	delete this->_shaderManager;
 	delete this->_inputHandler;
 	delete this->_camera;
+	delete this->_clock;
 
 	glDeleteVertexArrays(1, &this->_vertexArrayID);
 	glfwTerminate();

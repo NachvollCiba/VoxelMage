@@ -8,12 +8,12 @@ Clock::Clock() {
 	this->_deltaFrameTime = 0;
 }
 
-void Clock::update() {
+void Clock::_update() {
 	double thisFrameTime = glfwGetTime();
 	this->_deltaFrameTime = thisFrameTime - this->_lastFrameTime;
 	this->_lastFrameTime = thisFrameTime;
 }
 
-double Clock::getDeltaFrameTime() {
+float Clock::getDeltaFrameTime() const {
 	return this->_deltaFrameTime;
 }
