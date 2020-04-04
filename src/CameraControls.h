@@ -15,3 +15,13 @@ class MoveCameraHandler : public IKeyHandler {
 		MoveCameraHandler(Camera& camera, utils::Direction moveDirection);
 		void whilePressed() override;
 };
+
+
+class RotateCameraHandler : public IMouseMoveHandler {
+	private:
+		Camera& _camera;
+
+	public:
+		RotateCameraHandler(Camera& camera);
+		void onMouseMoved(int deltaX, int deltaY);
+};

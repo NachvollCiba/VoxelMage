@@ -55,7 +55,7 @@ class CloseGameKeyHandler : public IKeyHandler {
 		}
 };
 
-void registerKeyHandlers(bool* runningFlag, Camera& camera, InputHandler& input) {
+void registerInputHandlers(bool* runningFlag, Camera& camera, InputHandler& input) {
 	// Close Game Handler
 	CloseGameKeyHandler* closeHandler = new CloseGameKeyHandler(runningFlag);
 	input.registerKeyHandler(GLFW_KEY_ESCAPE, closeHandler);
@@ -66,6 +66,9 @@ void registerKeyHandlers(bool* runningFlag, Camera& camera, InputHandler& input)
 	input.registerKeyHandler(GLFW_KEY_D, new MoveCameraHandler(camera, utils::RIGHT));
 	input.registerKeyHandler(GLFW_KEY_W, new MoveCameraHandler(camera, utils::FORWARD));
 	input.registerKeyHandler(GLFW_KEY_S, new MoveCameraHandler(camera, utils::BACKWARD));
+
+	// Mouse Handler for rotating the camera
+	input.registerMouseMovementHandler(new RotateCameraHandler(camera));
 }
 
 
@@ -92,7 +95,7 @@ int main(int argc, char *argv[]) {
 
 	// Close Game Key Handler
 	bool running = true;
-	registerKeyHandlers(&running, camera, input);
+	registerInputHandlers(&running, camera, input);
 
 	// Main Game Loop
 	std::cout << "Entering main loop" << std::endl;

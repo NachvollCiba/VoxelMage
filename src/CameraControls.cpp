@@ -1,6 +1,7 @@
 #include "CameraControls.h"
 
-#define SPEED 0.5f;
+#define SPEED 0.5f
+#define MOUSE_SPEED 0.3f
 
 MoveCameraHandler::MoveCameraHandler(Camera& camera, utils::Direction moveDirection) :
 	_camera(camera)
@@ -29,3 +30,13 @@ void MoveCameraHandler::whilePressed() {
 	this->_camera.updatePosition(this->_direction);
 }
 
+
+
+RotateCameraHandler::RotateCameraHandler(Camera& camera) : _camera(camera) {
+
+}
+
+void RotateCameraHandler::onMouseMoved(int deltaX, int deltaY) {
+	this->_camera.updateVerticalAngle(deltaX * MOUSE_SPEED);
+	this->_camera.updateHorizontalAngle(deltaY * MOUSE_SPEED);
+}
