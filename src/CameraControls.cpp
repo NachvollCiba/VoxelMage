@@ -1,33 +1,29 @@
 #include "CameraControls.h"
+#include "utils.h"
 
 #define SPEED 0.5f
-#define MOUSE_SPEED 0.3f
+#define MOUSE_SPEED 0.1f
 
 MoveCameraHandler::MoveCameraHandler(Camera& camera, utils::Direction moveDirection) :
-	_camera(camera)
+	_camera(camera), _moveDirection(moveDirection)
 {
-	switch (moveDirection) {
-		case(utils::FORWARD):
-			this->_direction = glm::vec3(0.0f, 0.0f, 1.0f);
-			break;
-		case(utils::BACKWARD):
-			this->_direction = glm::vec3(0.0f, 0.0f, -1.0f);
-			break;
-		case(utils::LEFT):
-			this->_direction = glm::vec3(-1.0f, 0.0f, 0.0f);
-			break;
-		case(utils::RIGHT):
-			this->_direction = glm::vec3(1.0f, 0.0f, 0.0f);
-			break;
-		default:
-			this->_direction = glm::vec3(0, 0, 0);
-			break;
-	}
-	this->_direction *= SPEED;
 }
 
 void MoveCameraHandler::whilePressed() {
-	this->_camera.updatePosition(this->_direction);
+	switch (this->_moveDirection) {
+		case(utils::FORWARD):
+			this->_camera.updatePosition(this->_camera.getFront()*SPEED);
+			break;
+		case(utils::BACKWARD):
+			this->_camera.updatePosition(-this->_camera.getFront()*SPEED);
+			break;
+		case(utils::RIGHT):
+			this->_camera.updatePosition(this->_camera.getRight()*SPEED);
+			break;
+		case(utils::LEFT):
+			this->_camera.updatePosition(-this->_camera.getRight()*SPEED);
+			break;
+	}
 }
 
 

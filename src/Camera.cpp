@@ -20,19 +20,20 @@ Camera::Camera(float fieldOfView, float range, float aspectRatio) :
 void Camera::_update() {
 	static const float PI_2 = 3.141592f / 2.0f;
 
-	glm::vec3 front = glm::vec3(
+	this->_front = glm::vec3(
 	  cos(this->_verticalAngle) * sin(this->_horizontalAngle),
 	  sin(this->_verticalAngle),
 	  cos(this->_verticalAngle) * cos(this->_horizontalAngle)
 	);
-	glm::vec3 right =
-	  glm::vec3(sin(this->_horizontalAngle-PI_2), 0, cos(this->_horizontalAngle-PI_2));
-	glm::vec3 up = glm::cross(right, front);
+	this->_right =
+	 glm::vec3(sin(this->_horizontalAngle-PI_2), 0, cos(this->_horizontalAngle-PI_2));
+	glm::vec3 up = glm::cross(this->_right, this->_front);
 
 	// recompute the view matrix
 	this->_projectionMatrix = 
 	 glm::perspective(this->_fieldOfView, this->_aspectRatio, this->_nearDepth, this->_farDepth);
-	this->_viewMatrix = glm::lookAt(this->_position, front, up);
+	this->_viewMatrix =
+	 glm::lookAt(this->_position, this->_position+this->_front, up);
 }
 
 void Camera::setPosition(float x, float y, float z) {
@@ -74,6 +75,12 @@ const glm::mat4& Camera::getProjectionMatrix() const {
 }
 const glm::mat4& Camera::getViewMatrix() const {
 	return this->_viewMatrix;
+}
+const glm::vec3& Camera::getFront() const {
+	return this->_front;
+}
+const glm::vec3& Camera::getRight() const {
+	return this->_right;
 }
 
 

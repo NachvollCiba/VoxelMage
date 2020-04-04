@@ -30,7 +30,7 @@ void InputHandler::update() {
 	int windowWidth, windowHeight;
 	glfwGetWindowSize(&this->_window, &windowWidth, &windowHeight);
 	int centerX = windowWidth/2;
-	int centerY = windowWidth/2;
+	int centerY = windowHeight/2;
 	
 	// call all the mouse movement handlers
 	double mouseX, mouseY;

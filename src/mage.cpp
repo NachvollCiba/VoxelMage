@@ -89,9 +89,9 @@ int main(int argc, char *argv[]) {
 	camera.setPosition(4, 3, 3);
 
 	// Render 3 cubes in different colors
-	renderer.renderCube(glm::vec3(0.0f, 0.0f, 0.0f), 1.0f, glm::vec3(1,0,0));
-	renderer.renderCube(glm::vec3(5.0f, 0.0f, 0.0f), 1.0f, glm::vec3(0,1,0));
-	renderer.renderCube(glm::vec3(0.0f, 3.0f, 0.0f), 1.0f, glm::vec3(0,0,1));
+	renderer.renderCube(glm::vec3(0.0f, 0.0f, 0.0f));
+	renderer.renderCube(glm::vec3(5.0f, 0.0f, 0.0f));
+	renderer.renderCube(glm::vec3(0.0f, 3.0f, 0.0f));
 
 	// Close Game Key Handler
 	bool running = true;

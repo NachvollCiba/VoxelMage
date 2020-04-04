@@ -9,6 +9,8 @@ class Camera {
 
 	private:
 		glm::vec3 _position;
+		glm::vec3 _front;
+		glm::vec3 _right;
 		glm::mat4 _projectionMatrix;
 		glm::mat4 _viewMatrix;
 
@@ -39,6 +41,8 @@ class Camera {
 
 		const glm::mat4& getProjectionMatrix() const;
 		const glm::mat4& getViewMatrix() const;
+		const glm::vec3& getFront() const;
+		const glm::vec3& getRight() const;
 
 		glm::mat4 transform (const glm::mat4& modelMatrix) const;
 };

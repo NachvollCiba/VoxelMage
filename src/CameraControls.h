@@ -9,7 +9,7 @@
 class MoveCameraHandler : public IKeyHandler {
 	private:
 		Camera& _camera;
-		glm::vec3 _direction;
+		const utils::Direction _moveDirection;
 
 	public:
 		MoveCameraHandler(Camera& camera, utils::Direction moveDirection);
