@@ -3,12 +3,12 @@
 #include <algorithm>
 
 
-InputHandler::InputHandler(GLFWwindow& window) :
+InputHandler::InputHandler(GLFWwindow* window) :
 	_window(window),
 	_registeredKeys(std::vector<int>()),
 	_mouseMovementHandlers(std::vector<IMouseMoveHandler*>())
 {
-	glfwSetInputMode(&window, GLFW_STICKY_KEYS, GL_TRUE);
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 }
 
 void InputHandler::update() {
@@ -28,18 +28,18 @@ void InputHandler::update() {
 
 	// find the center of the window
 	int windowWidth, windowHeight;
-	glfwGetWindowSize(&this->_window, &windowWidth, &windowHeight);
+	glfwGetWindowSize(this->_window, &windowWidth, &windowHeight);
 	int centerX = windowWidth/2;
 	int centerY = windowHeight/2;
 	
 	// call all the mouse movement handlers
 	double mouseX, mouseY;
-	glfwGetCursorPos(&this->_window, &mouseX, &mouseY);
+	glfwGetCursorPos(this->_window, &mouseX, &mouseY);
 	if ((int)mouseX != centerX && (int)mouseY != centerY) {
 		for (IMouseMoveHandler* mouseHandler : this->_mouseMovementHandlers) {
 			mouseHandler->onMouseMoved(mouseX-centerX, mouseY-centerY);
 		}
-		glfwSetCursorPos(&this->_window, centerX, centerY);
+		glfwSetCursorPos(this->_window, centerX, centerY);
 	}
 }
 
@@ -75,5 +75,5 @@ void InputHandler::unregisterMouseMovementHandler(IMouseMoveHandler* handler) {
 
 
 bool InputHandler::_isKeyPressed(int key) {
-	return glfwGetKey(&this->_window, key) == GLFW_PRESS;
+	return glfwGetKey(this->_window, key) == GLFW_PRESS;
 }

@@ -6,6 +6,8 @@ project(mage)
 
 set(ALL_SOURCES
 	src/mage.cpp
+	src/Game.h
+	src/Game.cpp
 	src/InputHandler.cpp
 	src/InputHandler.h
 	src/ShaderManager.cpp
@@ -17,6 +19,8 @@ set(ALL_SOURCES
 	src/utils.h
 	src/CameraControls.cpp
 	src/CameraControls.h
+	src/Clock.cpp
+	src/Clock.h
 )
 
 add_executable(mage ${ALL_SOURCES})

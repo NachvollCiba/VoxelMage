@@ -23,7 +23,7 @@ class IMouseMoveHandler {
 class InputHandler {
 
 	private:
-		GLFWwindow& _window;
+		GLFWwindow* _window;
 
 		// Key Handlers
 		IKeyHandler* _keyHandlers[GLFW_KEY_LAST];
@@ -36,7 +36,7 @@ class InputHandler {
 		bool _isKeyPressed(int key);
 
 	public:
-		InputHandler(GLFWwindow& window);
+		InputHandler(GLFWwindow* window);
 
 		void update();
 		void registerKeyHandler(int key, IKeyHandler* handler);

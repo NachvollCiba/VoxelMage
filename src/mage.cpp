@@ -13,6 +13,7 @@
 #include "Camera.h"
 #include "CameraControls.h"
 #include "Renderer.h"
+#include "Game.h"
 
 
 GLFWwindow* createWindow() {
@@ -75,43 +76,9 @@ void registerInputHandlers(bool* runningFlag, Camera& camera, InputHandler& inpu
 int main(int argc, char *argv[]) {
 	GLFWwindow* window = createWindow();
 
-	InputHandler input = InputHandler(*window);
-	ShaderManager shaderManager = ShaderManager("assets/shaders/");
+	Game game = Game(window);
+	game.start();
 
-	Camera camera = Camera(45.0f);
-	Renderer renderer = Renderer(camera, shaderManager);
-
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-	GLuint vertexArrayID;
-	glGenVertexArrays(1, &vertexArrayID);
-	glBindVertexArray(vertexArrayID);
-
-	camera.setPosition(4, 3, 3);
-
-	// Render 3 cubes in different colors
-	renderer.renderCube(glm::vec3(0.0f, 0.0f, 0.0f));
-	renderer.renderCube(glm::vec3(5.0f, 0.0f, 0.0f));
-	renderer.renderCube(glm::vec3(0.0f, 3.0f, 0.0f));
-
-	// Close Game Key Handler
-	bool running = true;
-	registerInputHandlers(&running, camera, input);
-
-	// Main Game Loop
-	std::cout << "Entering main loop" << std::endl;
-	while (running) {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		input.update();
-		renderer.update();
-
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
-
-	std::cout << "Terminating program..." << std::endl;
-	glDeleteVertexArrays(1, &vertexArrayID);
-	glfwTerminate();
 	return 0;
 }
 
