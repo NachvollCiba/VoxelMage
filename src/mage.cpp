@@ -44,34 +44,6 @@ GLFWwindow* createWindow() {
 }
 
 
-class CloseGameKeyHandler : public IKeyHandler {
-	private: 
-		bool* _running;
-
-	public:
-		CloseGameKeyHandler(bool* running) : _running(running) {}
-
-		void onJustPressed() override {
-			*this->_running = false;
-		}
-};
-
-void registerInputHandlers(bool* runningFlag, Camera& camera, InputHandler& input) {
-	// Close Game Handler
-	CloseGameKeyHandler* closeHandler = new CloseGameKeyHandler(runningFlag);
-	input.registerKeyHandler(GLFW_KEY_ESCAPE, closeHandler);
-	input.registerKeyHandler(GLFW_KEY_Q, closeHandler);
-
-	// Key Handler for moving the camera
-	input.registerKeyHandler(GLFW_KEY_A, new MoveCameraHandler(camera, utils::LEFT));
-	input.registerKeyHandler(GLFW_KEY_D, new MoveCameraHandler(camera, utils::RIGHT));
-	input.registerKeyHandler(GLFW_KEY_W, new MoveCameraHandler(camera, utils::FORWARD));
-	input.registerKeyHandler(GLFW_KEY_S, new MoveCameraHandler(camera, utils::BACKWARD));
-
-	// Mouse Handler for rotating the camera
-	input.registerMouseMovementHandler(new RotateCameraHandler(camera));
-}
-
 
 int main(int argc, char *argv[]) {
 	GLFWwindow* window = createWindow();

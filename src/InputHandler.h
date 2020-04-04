@@ -14,6 +14,14 @@ class IKeyHandler {
 		virtual void onJustReleased() {};
 };
 
+class KeyPressedHandler : public IKeyHandler {
+	private:
+		void (*_callback)();
+	public:
+		KeyPressedHandler(void (*callback)());
+		void onJustPressed() override;
+};
+
 class IMouseMoveHandler {
 	public: 
 		virtual void onMouseMoved(int deltaX, int deltaY) {};

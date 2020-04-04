@@ -5,6 +5,14 @@
 #include <iostream>
 
 
+class CloseGameKeyHandler : public IKeyHandler {
+	private:
+		bool* _isRunning;
+	public:
+		CloseGameKeyHandler(bool* isRunning) : _isRunning(isRunning) {}
+		void onJustPressed() override { *this->_isRunning = false; }
+};
+
 Game::Game(GLFWwindow* window) :
 	_window(window),
 	_isRunning(false)
@@ -31,6 +39,9 @@ void Game::start() {
 	this->_renderer->renderCube(glm::vec3(0.0f, 0.0f, 0.0f));
 	this->_renderer->renderCube(glm::vec3(5.0f, 0.0f, 0.0f));
 	this->_renderer->renderCube(glm::vec3(0.0f, 3.0f, 0.0f));
+
+	this->_inputHandler->registerKeyHandler(GLFW_KEY_ESCAPE, new CloseGameKeyHandler(&this->_isRunning));
+	this->_inputHandler->registerKeyHandler(GLFW_KEY_Q, new CloseGameKeyHandler(&this->_isRunning));
 
 	// Register Key Handlers for moving
 	this->_inputHandler->registerKeyHandler(GLFW_KEY_A, new MoveCameraHandler(*this->_camera, utils::LEFT));

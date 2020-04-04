@@ -3,6 +3,16 @@
 #include <algorithm>
 
 
+KeyPressedHandler::KeyPressedHandler(void (*callback)()) :
+	_callback(callback)
+{
+}
+
+void KeyPressedHandler::onJustPressed() {
+	this->_callback();
+}
+
+
 InputHandler::InputHandler(GLFWwindow* window) :
 	_window(window),
 	_registeredKeys(std::vector<int>()),
