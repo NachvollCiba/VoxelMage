@@ -9,9 +9,12 @@ class Camera {
 
 	private:
 		glm::vec3 _position;
-		glm::vec3 _direction;
 		glm::mat4 _projectionMatrix;
 		glm::mat4 _viewMatrix;
+
+		// rotation
+		float _horizontalAngle;
+		float _verticalAngle;
 
 		float _fieldOfView; // fov in degrees
 		float _aspectRatio;
@@ -29,10 +32,10 @@ class Camera {
 		void updatePosition(float dX, float dY, float dZ);
 		void updatePosition(const glm::vec3& delta);
 
-		void setDirection(float x, float y, float z);
-		void setDirection(const glm::vec3& newDirection);
-		void updateDirection(float dX, float dY, float dZ);
-		void updateDirection(const glm::vec3& delta);
+		void setHorizontalAngle(float a);
+		void updateHorizontalAngle(float deltaA);
+		void setVerticalAngle(float a);
+		void updateVerticalAngle(float deltaA);
 
 		const glm::mat4& getProjectionMatrix() const;
 		const glm::mat4& getViewMatrix() const;

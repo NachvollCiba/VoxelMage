@@ -12,11 +12,14 @@
 class Renderer {
 
 	private:
+		static const int VERTEX_BUFFER = 0;
+		static const int COLOR_BUFFER = 1;
+
 		const Camera& _camera;
 		const ShaderManager& _shaderManager;
 
 		GLuint _shaderProgramID;
-		GLuint _vertexBuffer;
+		GLuint _buffers[2];
 
 		std::vector<glm::mat4> _cubes;
 

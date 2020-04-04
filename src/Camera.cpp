@@ -7,22 +7,32 @@
 
 Camera::Camera(float fieldOfView, float range, float aspectRatio) : 
 	_position(glm::vec3(0.0f, 0.0f, 0.0f)),
-	_direction(glm::vec3(0.0f, 0.0f, 0.0f)),
 	_fieldOfView(fieldOfView),
 	_nearDepth(0.1f),
 	_farDepth(range),
-	_aspectRatio(aspectRatio)
+	_aspectRatio(aspectRatio),
+	_horizontalAngle(3.14f),
+	_verticalAngle(0)
 {
 	this->_update();
 }
 
 void Camera::_update() {
-	static const glm::vec3 UP = glm::vec3(0.0f, 1.0f, 0.0f);
+	static const float PI_2 = 3.141592f / 2.0f;
+
+	glm::vec3 front = glm::vec3(
+	  cos(this->_verticalAngle) * sin(this->_horizontalAngle),
+	  sin(this->_verticalAngle),
+	  cos(this->_verticalAngle) * cos(this->_horizontalAngle)
+	);
+	glm::vec3 right =
+	  glm::vec3(sin(this->_horizontalAngle-PI_2), 0, cos(this->_horizontalAngle-PI_2));
+	glm::vec3 up = glm::cross(right, front);
 
 	// recompute the view matrix
 	this->_projectionMatrix = 
 	 glm::perspective(this->_fieldOfView, this->_aspectRatio, this->_nearDepth, this->_farDepth);
-	this->_viewMatrix = glm::lookAt(this->_position, this->_direction, UP);
+	this->_viewMatrix = glm::lookAt(this->_position, front, up);
 }
 
 void Camera::setPosition(float x, float y, float z) {
@@ -41,18 +51,20 @@ void Camera::updatePosition(const glm::vec3& delta) {
 }
 
 
-void Camera::setDirection(float x, float y, float z) {
-	this->setDirection(glm::vec3(x, y, z));
-}
-void Camera::setDirection(const glm::vec3& newDirection) {
-	this->_direction = newDirection;
+void Camera::setHorizontalAngle(float a) {
+	this->_horizontalAngle = a;
 	this->_update();
 }
-void Camera::updateDirection(float x, float y, float z) {
-	this->updateDirection(glm::vec3(x, y, z));
+void Camera::updateHorizontalAngle(float deltaA) {
+	this->_horizontalAngle += deltaA;
+	this->_update();
 }
-void Camera::updateDirection(const glm::vec3& delta) {
-	this->_direction += delta;
+void Camera::setVerticalAngle(float a) {
+	this->_verticalAngle = a;
+	this->_update();
+}
+void Camera::updateVerticalAngle(float deltaA) {
+	this->_verticalAngle += deltaA;
 	this->_update();
 }
 
