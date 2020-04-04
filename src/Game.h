@@ -8,10 +8,10 @@
 class Game {
 
 	private:
-		Camera _camera;
-		Renderer _renderer;
-		ShaderManager _shaderManager;
-		InputHandler _inputHandler;
+		Camera* _camera;
+		Renderer* _renderer;
+		ShaderManager* _shaderManager;
+		InputHandler* _inputHandler;
 
 		GLFWwindow* _window;
 
