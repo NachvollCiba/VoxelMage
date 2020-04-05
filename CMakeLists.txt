@@ -21,6 +21,10 @@ set(ALL_SOURCES
 	src/CameraControls.h
 	src/Clock.cpp
 	src/Clock.h
+	src/Block.cpp
+	src/Block.h
+	src/Chunk.cpp
+	src/Chunk.h
 )
 
 add_executable(mage ${ALL_SOURCES})
